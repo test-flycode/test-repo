@@ -1,0 +1,63 @@
+version: 0.42
+
+# FlyCode supports mono-repos in which you manage multiple apps
+apps:
+
+    # We still need you to give human readable names :)
+  - name: App Dashboard
+    path: dashboard/frontend/
+
+    # We guess your resource file location and structure
+    text-resources:
+      - path: src/lang/*.json
+        format: formatjs
+
+  - name: App Admin
+    path: admin/frontend/
+
+    # But sometimes you'll know better than us...
+    text-resources:
+      - path: custom/lng/*.json
+        format: formatjs-nested
+
+# FlyCode adapts to your branching model
+branches:
+
+    # We adapted with the times, but don't worry - master is still supported ;)
+  - name: main
+    alias: Production Environment
+    # You don't like allowing edits directly in production, we get that :) 
+    # But knowing what's there is useful
+    mode: display
+
+  - name: dev
+    alias: Development Environment
+    # We don't commit directly to your branches
+    # Pull Requests are created and managed by your team 
+    mode: pull-request
+
+  - name: feature/**
+    # In some cases you'd might like us to commit directly to your branches
+    # to enhance collabiration during development 
+    mode: write
+
+# FlyCode supports tags and releases
+tags:
+
+  - name: v1.42.0
+    alias: Important Release
+    # Of course tag can only be in display|ignore mode
+    mode: display
+
+
+defaults:
+
+  branches:
+    # FlyCode considers unmapped branches as disabled. 
+    # You may change that by using: pull-request|write|display|ignore
+    mode: ignore
+
+  apps:
+    text-resources:
+        - path: src/lang/*.json
+          format: formatjs
