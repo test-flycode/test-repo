@@ -4,8 +4,8 @@ environments:
     branch: main
     mode: pull-request
 apps:
-  - name: app
-    path: main
+  - name: test
+    path: src
     text-resources:
-      - path: src/lang/*.json
-        format: nested-key-value
+      - path: lang/*.json
+        format: simple-value-value
